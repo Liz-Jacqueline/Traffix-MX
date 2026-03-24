@@ -1,0 +1,201 @@
+/* =========================
+   CONTENEDOR GENERAL
+   ========================= */
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.contenedor-registro {
+  display: flex;
+  height: 100vh;
+  background: #0f0f0f;
+}
+
+/* =========================
+   PANEL IZQUIERDO
+   ========================= */
+.panel-formulario-registro {
+  width: 38%;
+  background: #111;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 40px 55px;
+}
+
+.titulo-registro {
+  font-size: 24px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+/* =========================
+   FORMULARIO
+   ========================= */
+.formulario-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.campo-registro label {
+  font-size: 11px;
+  margin-bottom: 3px;
+  color: #aaa;
+}
+
+.campo-registro input {
+  padding: 9px 12px;
+  border-radius: 5px;
+  border: 1px solid #2b2b2b;
+  background: #1a1a1a;
+  color: white;
+  font-size: 13px;
+}
+
+.campo-registro input:focus {
+  border-color: #ff4d00;
+  outline: none;
+}
+
+/* =========================
+   BOTÓN PRINCIPAL
+   ========================= */
+.boton-registro {
+  margin-top: 8px;
+  padding: 10px;
+  background: #ff4d00;
+  border: none;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.boton-registro:hover {
+  background: #ff6a2d;
+}
+
+/* =========================
+   SEPARADOR
+   ========================= */
+.separador-registro {
+  display: flex;
+  align-items: center;
+  margin: 14px 0;
+  gap: 6px;
+}
+
+.separador-registro::before,
+.separador-registro::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #2b2b2b;
+}
+
+.separador-registro span {
+  font-size: 11px;
+  color: #777;
+}
+
+/* =========================
+   BOTONES SOCIALES
+   ========================= */
+.botones-sociales-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.boton-social-registro {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #2b2b2b;
+  background: #161616;
+  color: #ddd;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.boton-social-registro:hover {
+  border-color: #ff4d00;
+  background: #1f1f1f;
+}
+
+/* =========================
+   TEXTO INFERIOR
+   ========================= */
+.texto-registro {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #888;
+}
+
+.texto-registro a {
+  color: #ff4d00;
+  text-decoration: none;
+}
+
+/* =========================
+   PANEL DERECHO
+   ========================= */
+.panel-imagen-registro {
+  width: 62%;
+  background: url('/images/home/arcos.png') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 70px;
+}
+
+.panel-imagen-registro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+}
+
+.mensaje-derecha {
+  position: relative;
+  color: white;
+  max-width: 420px;
+}
+
+.mensaje-derecha h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.mensaje-derecha p {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 900px) {
+  .contenedor-registro {
+    flex-direction: column;
+  }
+
+  .panel-formulario-registro,
+  .panel-imagen-registro {
+    width: 100%;
+  }
+
+  body {
+    overflow: auto;
+  }
+}

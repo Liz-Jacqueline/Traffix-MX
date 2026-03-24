@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimTráfico — Simulador</title>
+  <link rel="stylesheet" href="/css/components/navbar.css">
+  <link rel="stylesheet" href="/css/pages/simulador.css">
+</head>
+<body>
+<header>
+  <div class="logo">SIM<span>TRÁFICO</span> <span style="color:var(--ia);font-size:.75rem">IA</span></div>
+  <div style="display:flex;gap:7px;align-items:center">
+    <div class="badge ia">IA ACTIVA</div>
+    <div class="badge">SEMI-ACTUADO</div>
+    <div class="badge g">IoT READY</div>
+  </div>
+</header>
+<div class="app">
+
+<!-- ═══ SIDEBAR ═══ -->
+<div class="sidebar">
+  <div class="ss">
+    <div class="st">Intersección</div>
+    <button class="ibtn active" onclick="selectIntersection(0)"><span class="dot"></span>Intersección Tipo T</button>
+    <button class="ibtn" onclick="selectIntersection(1)"><span class="dot"></span>Cruce en Cruz (+)</button>
+    <button class="ibtn" onclick="selectIntersection(2)"><span class="dot"></span>Doble Cruce en Y</button>
+  </div>
+  <div class="ss">
+    <div class="st">Simulación</div>
+    <div class="crow">
+      <button class="btn p" id="playBtn" onclick="toggleSim()">▶ INICIAR</button>
+      <button class="btn d" onclick="resetSim()">↺ RESET</button>
+    </div>
+    <div class="srow">
+      <span class="slabel">Velocidad</span>
+      <input type="range" min="1" max="5" value="2" id="speedSlider" oninput="setSpeed(this.value)">
+      <span class="sval" id="speedVal">×2</span>
+    </div>
+  </div>
+  <div class="ss">
+    <div class="st">Fase Activa</div>
+    <div id="phaseDisplay" style="font-size:.77rem;color:var(--accent);margin-bottom:3px">—</div>
+    <div class="phase-bar" id="phaseBar"></div>
+  </div>
+  <div class="ss">
+    <div class="st">Estadísticas</div>
+    <div class="sgrid">
+      <div class="sc"><div class="lbl">Autos</div><div class="val g" id="statCars">0</div></div>
+      <div class="sc"><div class="lbl">Peatones</div><div class="val pu" id="statPed">0</div></div>
+      <div class="sc"><div class="lbl">Vel. Prom.</div><div class="val" id="statSpeed">0</div></div>
+      <div class="sc"><div class="lbl">Espera</div><div class="val y" id="statWait">0s</div></div>
+      <div class="sc"><div class="lbl">Botón Peat.</div><div class="val o" id="statBtn">0</div></div>
+      <div class="sc"><div class="lbl">Cruces Peat.</div><div class="val pu" id="statPedCross">0</div></div>
+      <div class="sc"><div class="lbl">IA Ahorró</div><div class="val ia" id="statSaved">0s</div></div>
+      <div class="sc full"><div class="lbl">Autos Cruzados</div><div class="val" id="statTotal">0</div></div>
+    </div>
+  </div>
+  <div class="ss">
+    <div class="st">Semáforos + IA</div>
+    <div id="signalStatus"></div>
+  </div>
+  <div class="ss">
+    <div class="st">Sensores</div>
+    <div class="sensor-row" id="sensorDots"></div>
+    <div style="font-size:.67rem;color:var(--muted);margin-top:4px" id="sensorLabel">0/0</div>
+  </div>
+  <div class="ss">
+    <div class="st">Botón Peatonal</div>
+    <button class="pbtn" onclick="manualPedRequest()">🚶 Solicitar Cruce</button>
+    <div style="font-size:.67rem;color:var(--muted);margin-top:4px" id="pedStatus">Sin solicitud</div>
+  </div>
+  <div class="ss">
+    <div class="st">🧠 Log IA</div>
+    <div class="ia-log-wrap" id="iaLog"><div class="ia-empty">Inicia la simulación para ver decisiones de la IA.</div></div>
+  </div>
+</div>
+
+<!-- ═══ CANVAS ═══ -->
+<div class="main">
+  <div class="cwrap">
+    <canvas id="sim"></canvas>
+    <div class="clabel" id="intersectionLabel">INTERSECCIÓN TIPO T</div>
+  </div>
+</div>
+
+<!-- ═══ RIGHT PANEL ═══ -->
+<div class="rp">
+  <div class="cb"><h4>Flujo Vehicular</h4><canvas id="flowChart" height="70"></canvas></div>
+  <div class="cb"><h4>Verde Adaptativo (s)</h4><canvas id="greenChart" height="70"></canvas></div>
+  <div class="cb">
+    <h4>Horas Pico</h4>
+    <div class="pbars" id="peakBars"></div>
+    <div class="phl"><span>6h</span><span>9h</span><span>12h</span><span>15h</span><span>18h</span><span>21h</span></div>
+    <div style="font-size:.63rem;color:var(--muted);margin-top:3px" id="peakLabel">Hora: 06:00</div>
+  </div>
+  <div class="cb"><h4>Botón Peatonal</h4><canvas id="pedBtnChart" height="62"></canvas></div>
+  <div class="cb"><h4>Presión por Carril (IA)</h4><canvas id="densityChart" height="62"></canvas></div>
+  <div class="cb"><h4>IA: Segundos Ahorrados</h4><canvas id="savedChart" height="62"></canvas></div>
+</div>
+</div>
+  <!-- Chart.js desde CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <!-- tu JS -->
+  <script src="/js/simulador.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+    "name": "integrador",
+    "version": "1.0.0",
+    "description": "Proyecto integrador con login, JWT y MongoDB",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "keywords": [],
+    "author": "Daniela / Equipo",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^6.0.0",
+        "bcryptjs": "^3.0.3",
+        "cookie-parser": "^1.4.7",
+        "db-local": "^3.1.0",
+        "dotenv": "^17.3.1",
+        "ejs": "^3.1.10",
+        "express": "^5.2.1",
+        "jsonwebtoken": "^9.0.3",
+        "mongoose": "^8.23.0",
+        "nodemailer": "^8.0.3"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.11"
+    }
+}

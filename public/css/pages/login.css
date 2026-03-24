@@ -1,0 +1,444 @@
+
+:root {
+  --gold:    #f5a623;
+  --dark:    #05050f;
+  --glass:   rgba(4, 4, 18, 0.72);
+  --border:  rgba(245, 166, 35, 0.18);
+  --text:    #f0ead6;
+  --muted:   rgba(240, 234, 214, 0.45);
+  --panel-w: 420px;
+  --card-h:  580px;
+}
+
+.body-login {
+  padding: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────
+   FONDO
+   👇 Cambia 'fondo.jpg' por el nombre de tu imagen
+───────────────────────────────────────────────── */
+.bg {
+  position: fixed;
+  inset: 0;
+  background: url('/images/login/login.avif') center / cover no-repeat;
+  filter: brightness(0.45) saturate(1.3);
+  z-index: 0;
+}
+
+.bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(5,5,15,0.3) 0%,
+    rgba(5,5,15,0.85) 100%
+  );
+}
+
+/* SCANLINES */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent, transparent 2px,
+    rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+}
+
+/* ─── CARD WRAPPER ─── */
+.wrapper {
+  position: relative;
+  z-index: 10;
+  width: calc(var(--panel-w) * 2);
+  height: var(--card-h);
+  display: flex;
+  overflow: hidden;
+  clip-path: polygon(
+    0 0, calc(100% - 28px) 0, 100% 28px,
+    100% 100%, 28px 100%, 0 calc(100% - 28px)
+  );
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px var(--border);
+  animation: wrapper-in 0.9s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes wrapper-in {
+  from { opacity: 0; transform: translateY(48px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.wrapper::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 28px; height: 28px;
+  background: var(--gold);
+  clip-path: polygon(0 0, 100% 100%, 100% 0);
+  z-index: 50;
+}
+
+.wrapper::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 28px; height: 28px;
+  background: rgba(245,166,35,0.4);
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  z-index: 50;
+}
+
+/* ─── FORMS AREA ─── */
+.forms-area {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: var(--glass);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+}
+
+.form-panel {
+  flex: 0 0 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 44px;
+}
+
+/* ─── TIPOGRAFÍA ─── */
+.form-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.form-sub {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  opacity: 0.75;
+}
+
+/* ─── SOCIAL ICONS ─── */
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.social-icon {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  clip-path: polygon(
+    0 0, calc(100% - 8px) 0, 100% 8px,
+    100% 100%, 8px 100%, 0 calc(100% - 8px)
+  );
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.social-icon:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(245,166,35,0.06);
+}
+
+/* ─── DIVIDER ─── */
+.or-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.or-divider span {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ─── INPUTS ─── */
+.field { margin-bottom: 14px; }
+
+.field input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(245,166,35,0.15);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  clip-path: polygon(
+    0 0, calc(100% - 8px) 0, 100% 8px,
+    100% 100%, 8px 100%, 0 calc(100% - 8px)
+  );
+}
+
+.field input::placeholder {
+  color: rgba(240,234,214,0.22);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.field input:focus {
+  border-color: var(--gold);
+  background: rgba(245,166,35,0.04);
+  box-shadow: 0 0 0 3px rgba(245,166,35,0.07);
+}
+
+/* ─── FORGOT ─── */
+.forgot {
+  display: block;
+  text-align: right;
+  font-size: 10px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.forgot:hover { color: var(--gold); }
+
+/* ─── SUBMIT BUTTON ─── */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--gold);
+  color: #080808;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(
+    0 0, calc(100% - 10px) 0, 100% 10px,
+    100% 100%, 10px 100%, 0 calc(100% - 10px)
+  );
+  transition: background 0.2s;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    120deg, transparent 30%,
+    rgba(255,255,255,0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.submit-btn:hover::before { transform: translateX(100%); }
+.submit-btn:hover { background: #ffc04a; }
+.submit-btn:active { transform: scale(0.98); }
+
+/* ─────────────────────────────────────────────────
+   PANEL DESLIZANTE  ← CORRECCIÓN PRINCIPAL AQUÍ
+───────────────────────────────────────────────── */
+.slider {
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 30;
+
+  /* Transición suave */
+  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 44px;
+  gap: 20px;
+
+  /* ← FONDO COMPLETAMENTE OPACO — sin rgba transparentes */
+  background: linear-gradient(
+    145deg,
+    #1a0a00 0%,
+    #100600 50%,
+    #0d0500 100%
+  );
+  border-right: 1px solid var(--border);
+
+  /* ← Aísla el panel para que tape todo lo que hay detrás */
+  isolation: isolate;
+}
+
+/* Al activar signup-mode el slider se mueve a la derecha */
+.wrapper.signup-mode .slider {
+  transform: translateX(100%);
+  border-right: none;
+  border-left: 1px solid var(--border);
+}
+
+/* Contenidos internos del slider */
+#slider-signin-content,
+#slider-signup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Por defecto el contenido de signup está oculto */
+#slider-signup-content {
+  display: none;
+}
+
+.slider-badge {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.slider h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.05;
+  text-align: center;
+}
+
+.slider h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.slider p {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 240px;
+}
+
+.slider-btn {
+  margin-top: 8px;
+  padding: 13px 36px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(
+    0 0, calc(100% - 10px) 0, 100% 10px,
+    100% 100%, 10px 100%, 0 calc(100% - 10px)
+  );
+  transition: color 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--gold);
+  transform: translateX(-102%);
+  transition: transform 0.35s ease;
+}
+
+.slider-btn:hover::before { transform: translateX(0); }
+.slider-btn:hover { color: #080808; }
+.slider-btn span { position: relative; z-index: 1; }
+
+.slider-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+/* ─── MOBILE TOGGLE ─── */
+.mobile-toggle {
+  display: none;
+  text-align: center;
+  margin-top: 18px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.mobile-toggle a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+  .wrapper {
+    width: 340px;
+    height: auto;
+    flex-direction: column;
+    clip-path: polygon(
+      0 0, calc(100% - 20px) 0, 100% 20px,
+      100% 100%, 20px 100%, 0 calc(100% - 20px)
+    );
+  }
+
+  .forms-area { flex-direction: column; }
+  .form-panel { flex: none; padding: 36px 32px; }
+
+  .slider {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    border: none;
+    border-top: 1px solid var(--border);
+    padding: 36px 32px;
+    display: none !important;
+  }
+
+  .mobile-toggle { display: block; }
+  .signup-panel  { display: none; }
+
+  .wrapper.signup-mode .signin-panel { display: none; }
+  .wrapper.signup-mode .signup-panel { display: flex; }
+}

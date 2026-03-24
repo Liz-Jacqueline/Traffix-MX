@@ -1,0 +1,242 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #000000;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero-overlay {
+  background: rgba(0,0,0,0.5);
+  float: right;
+  text-align: right;
+  padding: 40px;
+  border-radius: 20px;
+  width: 60%;
+}
+
+.section-box {
+  background: rgba(0,0,0,0.05);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 40px;
+  max-width: 900px;
+}
+
+
+
+/* CSS para las tarjetas de semáforos */
+
+.sem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'Exo 2', sans-serif;
+}
+@media (max-width: 900px) { .sem-grid { grid-template-columns: 1fr; } }
+
+.sem-card {
+  position: relative;
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border-radius: 24px;
+  padding: 52px 40px 48px;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+  animation: semCardIn 0.6s cubic-bezier(.22,1,.36,1) forwards;
+  transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease, border-color 0.35s ease;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.sem-card:nth-child(1) { animation-delay: 0.2s; }
+.sem-card:nth-child(2) { animation-delay: 0.4s; }
+.sem-card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes semCardIn {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.sem-card::before {
+  content: '';
+  position: absolute;
+  top: -60%; left: -60%;
+  width: 220%; height: 220%;
+  background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.03) 60deg, transparent 120deg);
+  animation: semSweep 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.sem-card:hover::before { opacity: 1; }
+
+@keyframes semSweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.sem-card::after {
+  content: '';
+  position: absolute;
+  bottom: -50px; right: -50px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 0.25;
+}
+.sem-card:hover::after { transform: scale(1.6); opacity: 0.6; }
+
+.sem-card.verde::after    { background: radial-gradient(circle, rgba(34,197,94,0.6) 0%, transparent 70%); }
+.sem-card.amarillo::after { background: radial-gradient(circle, rgba(234,179,8,0.6) 0%, transparent 70%); }
+.sem-card.rojo::after     { background: radial-gradient(circle, rgba(239,68,68,0.6) 0%, transparent 70%); }
+
+.sem-card.verde:hover    { transform: translateY(-10px) scale(1.02); border-color: rgba(34,197,94,0.5);  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(34,197,94,0.4),  0 0 50px rgba(34,197,94,0.15); }
+.sem-card.amarillo:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(234,179,8,0.5);  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(234,179,8,0.4),  0 0 50px rgba(234,179,8,0.15); }
+.sem-card.rojo:hover     { transform: translateY(-10px) scale(1.02); border-color: rgba(239,68,68,0.5);  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(239,68,68,0.4),  0 0 50px rgba(239,68,68,0.15); }
+
+.sem-accent-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 24px 24px 0 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(.22,1,.36,1);
+}
+.sem-card:hover .sem-accent-bar { transform: scaleX(1); }
+
+.sem-card.verde   .sem-accent-bar { background: linear-gradient(90deg, transparent, #22c55e, #86efac, #22c55e, transparent); filter: blur(1px); box-shadow: 0 0 14px 3px rgba(34,197,94,0.8); }
+.sem-card.amarillo .sem-accent-bar{ background: linear-gradient(90deg, transparent, #eab308, #fde047, #eab308, transparent); filter: blur(1px); box-shadow: 0 0 14px 3px rgba(234,179,8,0.8); }
+.sem-card.rojo    .sem-accent-bar { background: linear-gradient(90deg, transparent, #ef4444, #fca5a5, #ef4444, transparent); filter: blur(1px); box-shadow: 0 0 14px 3px rgba(239,68,68,0.8); }
+
+.sem-icon-wrap {
+  width: 80px; height: 80px;
+  margin-bottom: 32px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.sem-icon-wrap svg {
+  width: 64px; height: 64px;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: filter 0.35s, transform 0.4s cubic-bezier(.22,1,.36,1);
+  position: relative; z-index: 1;
+}
+
+.sem-card.verde   .sem-icon-wrap svg { stroke: rgba(134,239,172,0.8); filter: drop-shadow(0 0 8px rgba(34,197,94,0.5)); }
+.sem-card.amarillo .sem-icon-wrap svg{ stroke: rgba(253,224,71,0.8);  filter: drop-shadow(0 0 8px rgba(234,179,8,0.5)); }
+.sem-card.rojo    .sem-icon-wrap svg { stroke: rgba(252,165,165,0.8); filter: drop-shadow(0 0 8px rgba(239,68,68,0.5)); }
+
+.sem-card.verde:hover   .sem-icon-wrap svg { stroke: #86efac; filter: drop-shadow(0 0 18px rgba(34,197,94,1));  transform: scale(1.1) rotate(-3deg); }
+.sem-card.amarillo:hover .sem-icon-wrap svg{ stroke: #fde047; filter: drop-shadow(0 0 18px rgba(234,179,8,1));  transform: scale(1.1) rotate(-3deg); }
+.sem-card.rojo:hover    .sem-icon-wrap svg { stroke: #fca5a5; filter: drop-shadow(0 0 18px rgba(239,68,68,1));  transform: scale(1.1) rotate(-3deg); }
+
+.sem-icon-ring {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  transition: border-color 0.4s;
+  z-index: 2;
+}
+.sem-card.verde:hover   .sem-icon-ring { border-color: rgba(34,197,94,0.5);  animation: semPulse 1.5s ease-out infinite; }
+.sem-card.amarillo:hover .sem-icon-ring{ border-color: rgba(234,179,8,0.5);  animation: semPulse 1.5s ease-out infinite; }
+.sem-card.rojo:hover    .sem-icon-ring { border-color: rgba(239,68,68,0.5);  animation: semPulse 1.5s ease-out infinite; }
+
+@keyframes semPulse {
+  0%   { transform: scale(1);   opacity: 1; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+.sem-icon-glow {
+  position: absolute;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  filter: blur(22px);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 0;
+}
+.sem-card.verde   .sem-icon-glow { background: rgba(34,197,94,0.45); }
+.sem-card.amarillo .sem-icon-glow{ background: rgba(234,179,8,0.45); }
+.sem-card.rojo    .sem-icon-glow { background: rgba(239,68,68,0.45); }
+.sem-card:hover .sem-icon-glow { opacity: 1; }
+
+.sem-label {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 14px;
+  transition: color 0.3s;
+}
+.sem-card.verde:hover   .sem-label { color: #86efac; }
+.sem-card.amarillo:hover .sem-label{ color: #fde047; }
+.sem-card.rojo:hover    .sem-label { color: #fca5a5; }
+
+.sem-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s;
+  flex-grow: 1;
+}
+.sem-card.verde:hover   .sem-desc { color: rgba(134,239,172,0.6); }
+.sem-card.amarillo:hover .sem-desc{ color: rgba(253,224,71,0.6); }
+.sem-card.rojo:hover    .sem-desc { color: rgba(252,165,165,0.6); }
+
+/* Arrow link at bottom */
+.sem-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: 28px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s, transform 0.3s, color 0.3s;
+  position: relative;
+  z-index: 1;
+}
+.sem-card:hover .sem-link { opacity: 1; transform: translateX(0); }
+.sem-card.verde   .sem-link { color: #86efac; }
+.sem-card.amarillo .sem-link{ color: #fde047; }
+.sem-card.rojo    .sem-link { color: #fca5a5; }
+.sem-link svg { width: 16px; height: 16px; transition: transform 0.3s; }
+.sem-card:hover .sem-link:hover svg { transform: translateX(4px); }
